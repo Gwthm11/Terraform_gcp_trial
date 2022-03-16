@@ -94,3 +94,12 @@ async def get_video_data(session, video_id):
 asyncio.run(main())
 
 print("--- %s seconds ---" % (time.time() - start_time))
+
+
+roles/composer.ServiceAgentV2Ext
+roles/composer.admin
+roles/composer.environmentAndStorageObjectAdmin
+roles/composer.environmentAndStorageObjectViewer
+roles/composer.sharedVpcAgent
+roles/composer.user
+roles/composer.worker
