@@ -33,6 +33,7 @@ url = f'https://www.googleapis.com/youtube/v3/channels?id={channel_id}&key={key}
 r = requests.get(url)
 results = r.json()['items']
 
+
 playlist_id = results[0]['contentDetails']['relatedPlaylists']['uploads']
 
 url = f'https://www.googleapis.com/youtube/v3/playlistItems?playlistId={playlist_id}&key={key}&part=contentDetails&maxResults=50'
@@ -305,3 +306,6 @@ with models.DAG(
     create_cluster >> create_node_pools >> kubernetes_full_pod >> delete_cluster
     create_cluster >> create_node_pools >> kubernetes_affinity_ex >> delete_cluster
     create_cluster >> create_node_pools >> kubenetes_template_ex >> delete_cluster
+
+    
+https://download.oracle.com/otn_software/linux/instantclient/215000/oracle-instantclient-basic-21.5.0.0.0-1.el8.x86_64.rpm  
