@@ -1,3 +1,38 @@
+- We formed two columns for every tickets and also for every workcode_id ,
+
+	- column name : durationA  (duration between transmit time and end time )
+	- column name : durationB  (duration between start time  and end time )
+
+
+- We have found out tickets where work had involved for two consecutive days per ticket .
+
+
+- We have analysed the tickets with multiple entries and looked for possible combinations .
+	-Only two combinations were present ( 1 . [ PT , QH , Project_hourly   ]
+							  2 . [ EMLN , QH , Project_hourly ] )
+
+
+- We also checked the total cost per workcode_id with the invoice and both are matching .
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Value
 Executive Category
 Capacity
