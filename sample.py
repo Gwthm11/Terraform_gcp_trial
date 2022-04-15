@@ -1,6 +1,9 @@
 pip list | tail -n +3 | awk '{print $1}' | xargs pip show | grep -E 'Location:|Name:' | cut -d ' ' -f 2 | paste -d ' ' - - | awk '{print $2 "/" tolower($1)}' | xargs du -sh 2> /dev/null | sort -hr
 du -a /etc/ | sort -n -r | head -n 10
 
+df = df_first.set_index('EmpID').combine_first(df_second.set_index('EmpID')).reset_index()
+print (df)
+
 - We formed two columns for every tickets and also for every workcode_id ,
 
 	- column name : durationA  (duration between transmit time and end time )
