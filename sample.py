@@ -1,3 +1,28 @@
+DECLARE gb_divisor INT64 DEFAULT 1024*1024*1024;
+DECLARE tb_divisor INT64 DEFAULT gb_divisor*1024;
+DECLARE cost_per_tb_in_dollar INT64 DEFAULT 5;
+DECLARE cost_factor FLOAT64 DEFAULT cost_per_tb_in_dollar / tb_divisor;
+
+SELECT
+ ROUND(SUM(total_bytes_processed) / gb_divisor,2) as bytes_processed_in_gb,
+ ROUND(SUM(IF(cache_hit != true, total_bytes_processed, 0)) * cost_factor,4) as cost_in_dollar,
+ user_email,
+FROM (
+  (SELECT * FROM `region-us`.INFORMATION_SCHEMA.JOBS_BY_USER)
+  UNION ALL
+  (SELECT * FROM `other-project.region-us`.INFORMATION_SCHEMA.JOBS_BY_USER)
+)
+WHERE
+  DATE(creation_time) BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY) and CURRENT_DATE()
+GROUP BY 
+
+
+
+
+
+
+
+
 pip list | tail -n +3 | awk '{print $1}' | xargs pip show | grep -E 'Location:|Name:' | cut -d ' ' -f 2 | paste -d ' ' - - | awk '{print $2 "/" tolower($1)}' | xargs du -sh 2> /dev/null | sort -hr
 du -a /etc/ | sort -n -r | head -n 10
 
