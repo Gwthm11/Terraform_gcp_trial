@@ -1,3 +1,39 @@
+from google.cloud import bigquery
+
+client = bigquery.Client()
+
+datasets = list(client.list_datasets())
+project = client.project
+
+if datasets:
+    print('Datasets in project {}:'.format(project))
+    for dataset in datasets:  # API request(s)
+        print('Dataset: {}'.format(dataset.dataset_id))
+
+        query_job = client.query("select table_id, sum(size_bytes)/pow(10,9) as size from `"+dataset.dataset_id+"`.__TABLES__ group by 1")
+
+        results = query_job.result()
+        for row in results:
+            print("\tTable: {} : {}".format(row.table_id, row.size))
+
+else:
+    print('{} project does not contain any datasets.'.format(project))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 DECLARE gb_divisor INT64 DEFAULT 1024*1024*1024;
 DECLARE tb_divisor INT64 DEFAULT gb_divisor*1024;
 DECLARE cost_per_tb_in_dollar INT64 DEFAULT 5;
