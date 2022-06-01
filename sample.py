@@ -1,3 +1,40 @@
+;WITH CTE AS (
+    SELECT * ,
+        RN = ROW_NUMBER() OVER (ORDER BY [count] DESC)
+    FROM T1
+)
+,CTE2 AS (
+    SELECT *, 
+        RN2 = ROW_NUMBER() OVER(ORDER BY CEILING( RN / 5.00 ), (( 1 - CEILING( RN / 5.00 )) * [COUNT] ) DESC ) 
+    FROM CTE 
+)
+SELECT 
+    CTE2.rid, 
+    CTE2.[count], 
+    ((RN2+1)%5) +1 GroupIndex, 
+    SUM(CTE2.[count]) OVER (PARTITION BY ((RN2+1)%5)) CmlTotal 
+FROM CTE2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 from google.cloud import bigquery
 
 client = bigquery.Client()
