@@ -1,3 +1,18 @@
+def ms_teams_alert(context, teams_webhook=webhook):
+	dag_id = context[“dag_run”].dag_id
+	task_id = context[“task_instance”].task_id
+	context[“task_instance”].xcom_push(key=dag_id, value=True)
+	logs_url = context.get(“task_instance”).log_url
+	teams_notification = pymsteams.connectorcard(teams_webhook)
+	message = “`{}` has failed on task: `{}`”.format(dag_id, task_id)
+	teams_notification.title(“ERROR ALERT !!”)
+	teams_notification.color(“red”)
+	teams_notification.text(“ERROR MESSAGE: “ + message)
+	teams_notification.addLinkButton(“LOG URL”, logs_url)
+	teams_notification.send()
+
+
+
 ;WITH CTE AS (
     SELECT * ,
         RN = ROW_NUMBER() OVER (ORDER BY [count] DESC)
