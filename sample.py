@@ -1,3 +1,13 @@
+dfNew = df.merge(df2, left_index=True, right_index=True,
+                 how='outer', suffixes=('', '_y'))
+
+dfNew.drop(dfNew.filter(regex='_y$').columns, axis=1, inplace=True)
+
+
+
+
+
+
 import urllib 
 from urllib.request import urlopen
 html = urlopen("http://pythonscraping.com/pages/page1.html")
