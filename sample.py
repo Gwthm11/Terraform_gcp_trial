@@ -1,3 +1,16 @@
+echo '[
+   {
+      "origin": ["*"],
+      "method": ["GET","POST","PATCH","PUT","DELETE","OPTIONS"],
+      "responseHeader": ["Content-Type"],
+      "maxAgeSeconds": 3600
+   }
+]' > cors-config.json
+
+gsutil cors set cors-config.json gs://YOUR_BUCKET_NAME
+
+
+
 dfNew = df.merge(df2, left_index=True, right_index=True,
                  how='outer', suffixes=('', '_y'))
 
