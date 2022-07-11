@@ -1,3 +1,38 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gold
+provisioner: kubernetes.io/gce-pd
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+parameters:
+  type: pd-standard
+  fstype: ext4
+  replication-type: none
+	
+------------------
+
+apiVersion: v1
+ kind: PersistentVolumeClaim
+ metadata:
+   name: webapps-storage
+ spec:
+   storageClassName: gold
+   accessModes:
+     - ReadWriteOnce
+   resources:
+     requests:
+       storage: 50Gi
+
+
+
+
+
+
+
+
+
 # Persistent Volume Claim
 apiVersion: v1
 kind: PersistentVolumeClaim
