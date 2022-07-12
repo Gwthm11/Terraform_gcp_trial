@@ -1,3 +1,18 @@
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: neg-demo-ing
+spec:
+  defaultBackend:
+    service:
+      name: neg-demo-svc # Name of the Service targeted by the Ingress
+      port:
+        number: 80 # Should match the port used by the Service
+
+
+------------------------
+
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
