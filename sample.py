@@ -29,9 +29,17 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: address-name
 spec:
-  backend:
-    serviceName: web
-    servicePort: 8080
+  ingressClassName: nginx-example
+  rules:
+  - http:
+      paths:
+      - path: /testpath
+        pathType: Prefix
+        backend:
+          service:
+            name: test
+            port:
+              number: 80
 
 ------------------------------------------
 
