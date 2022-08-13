@@ -1,4 +1,52 @@
 
+
+-----------------------------------------
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: address-name
+spec:
+  backend:
+    serviceName: web
+    servicePort: 8080
+
+------------------------------------------
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: default
+  annotations:
+    beta.cloud.google.com/backend-config: '{"ports": {"8080":"backend-config"}}'
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    run: web
+  type: NodePort
+kubectl apply -f service.yaml
+
+--------------------------------------------
+
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: backend-config
+  namespace: default
+spec:
+  securityPolicy:
+    name: SECURITY_POLICY_NAME
+sed -i -e "s/SECURITY_POLICY_NAME/${SECURITY_POLICY_NAME}/g" backend-config.yaml
+
+kubectl apply -f backend-config.yaml
+
+---------------------------------------------
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
