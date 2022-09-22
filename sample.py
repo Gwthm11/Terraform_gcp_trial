@@ -10,7 +10,7 @@ spec:
     kind:       Deployment
     name:       hello-server
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"
 EOF
 
 kubectl set resources deployment hello-server --requests=cpu=450m
