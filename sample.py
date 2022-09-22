@@ -1,4 +1,18 @@
 # Downloading gcloud package
+cat << EOF > hello-vpa.yaml
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: hello-server-vpa
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       Deployment
+    name:       hello-server
+  updatePolicy:
+    updateMode: "Off"
+EOF
+
 kubectl set resources deployment hello-server --requests=cpu=450m
 kubectl create deployment hello-server --image=gcr.io/google-samples/hello-app:1.0
 
