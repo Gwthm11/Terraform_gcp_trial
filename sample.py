@@ -1,4 +1,8 @@
 # Downloading gcloud package
+kubectl create deployment hello-server --image=gcr.io/google-samples/hello-app:1.0
+
+
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
