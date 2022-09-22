@@ -1,4 +1,5 @@
 # Downloading gcloud package
+kubectl set resources deployment hello-server --requests=cpu=450m
 kubectl create deployment hello-server --image=gcr.io/google-samples/hello-app:1.0
 
 
