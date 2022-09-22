@@ -1,4 +1,6 @@
 # Downloading gcloud package
+
+kubectl scale deployment hello-server --replicas=2
 cat << EOF > hello-vpa.yaml
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
