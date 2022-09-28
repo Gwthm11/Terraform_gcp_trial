@@ -1,4 +1,14 @@
 # Downloading gcloud package
+storage_client = storage.Client()
+blobs = storage_client.list_blobs(bucket_or_name='name_of_your_bucket')
+
+blobs_total_size = 0
+for blob in blobs:
+    blobs_total_size += blob.size  # size in bytes
+
+blobs_total_size / (1024 ** 3)  # size in GB
+
+
 gsutil du -s | awk '{s+=$1}END{printf "%.10g TB\n", s/1000000000000}'
 
 
