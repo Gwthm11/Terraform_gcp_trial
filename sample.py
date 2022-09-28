@@ -1,4 +1,6 @@
 # Downloading gcloud package
+gsutil du -s | awk '{s+=$1}END{printf "%.10g TB\n", s/1000000000000}'
+
 
 kubectl scale deployment hello-server --replicas=2
 cat << EOF > hello-vpa.yaml
