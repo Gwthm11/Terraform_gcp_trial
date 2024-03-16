@@ -1,3 +1,37 @@
+import pymysql
+from google.oauth2 import service_account
+import google.auth.transport.requests
+
+scopes = ["https://www.googleapis.com/auth/cloud-platform", "https://www.googleapis.com/auth/sqlservice.admin"] 
+credentials = service_account.Credentials.from_service_account_file('key.json', scopes=scopes)
+auth_req = google.auth.transport.requests.Request()
+credentials.refresh(auth_req)
+config = {'user': SA_USER,
+            'host': ENDPOINT,
+            'database': DBNAME,
+            'password': credentials.token,
+            'ssl_ca': './server-ca.pem',
+            'ssl_cert': './client-cert.pem',
+            'ssl_key': './client-key.pem'}
+try:
+    conn =  pymysql.connect(**config)
+    with conn:
+        print("Connected")
+        cur = conn.cursor()
+        cur.execute("""SELECT now()""")
+        query_results = cur.fetchall()
+        print(query_results)
+except Exception as e:
+    print("Database connection failed due to {}".format(e))  
+
+
+
+
+
+
+
+
+---------------------
 # Downloading gcloud package
 storage_client = storage.Client()
 blobs = storage_client.list_blobs(bucket_or_name='name_of_your_bucket')
