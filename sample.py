@@ -1,3 +1,5 @@
+curl -o cloud-sql-proxy https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.9.0/cloud-sql-proxy.linux.amd64
+
 import pymysql
 from google.oauth2 import service_account
 import google.auth.transport.requests
